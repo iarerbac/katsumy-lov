@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regalo para Katsumy</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('img/fondo.jpg'); /* Cambia por la imagen de fondo */
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10;
+        }
+        .numpad {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .numpad input {
+            font-size: 2em;
+            width: 100%;
+            text-align: center;
+            border: none;
+            border-bottom: 2px solid #ccc;
+            margin-bottom: 10px;
+        }
+        .numpad button {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .gift-box {
+            display: none;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            z-index: 5;
+        }
+        .colored-box {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .red { background-color: #FFB6C1; }
+        .green { background-color: #98FB98; }
+        h1 {
+            color: black;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: black;
+        }
+        .hint {
+            font-size: 0.8em;
+            color: black; /* Cambiado a negro */
+            margin-top: 5px;
+            font-weight: bold; /* Negrita */
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay" id="overlay">
+    <div class="numpad">
+        <h1>Ingrese la contraseña 🔒</h1>
+        <input type="text" id="codeInput" maxlength="5">
+        <div>
+            <button onclick="addNumber('1')">1</button>
+            <button onclick="addNumber('2')">2</button>
+            <button onclick="addNumber('3')">3</button>
+        </div>
+        <div>
+            <button onclick="addNumber('4')">4</button>
+            <button onclick="addNumber('5')">5</button>
+            <button onclick="addNumber('6')">6</button>
+        </div>
+        <div>
+            <button onclick="addNumber('7')">7</button>
+            <button onclick="addNumber('8')">8</button>
+            <button onclick="addNumber('9')">9</button>
+        </div>
+        <div>
+            <button onclick="addNumber('0')">0</button>
+            <button onclick="checkCode()">✓</button>
+            <button onclick="clearInput()">🗑️</button> <!-- Botón de borrar -->
+        </div>
+        <p class="hint">Pista: Hola? que día es hoy</p>
+    </div>
+</div>
+
+<div class="gift-box" id="giftBox">
+    <h1>Sorpresa! 🎉</h1>
+    <div class="colored-box red">
+        <h2>📜</h2>
+        <img src="img/qr_carta.png" alt="QR de la carta" width="150">
+    </div>
+    <div class="colored-box green">
+        <h2>🎵</h2>
+        <img src="img/qr_spotify.png" alt="QR de Spotify" width="150">
+    </div>
+    <p>Escanéame :)</p>
+    <div class="footer">
+        <p>Un regalito de tu novio Joel con amor <3</p>
+    </div>
+</div>
+
+<script>
+    const correctCode = "30924";
+    
+    function addNumber(num) {
+        const input = document.getElementById('codeInput');
+        if (input.value.length < 5) {
+            input.value += num;
+        }
+    }
+
+    function checkCode() {
+        const input = document.getElementById('codeInput');
+        if (input.value === correctCode) {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('giftBox').style.display = 'block';
+        } else {
+            alert("Código incorrecto. Intenta de nuevo.");
+            input.value = '';
+        }
+    }
+
+    function clearInput() {
+        document.getElementById('codeInput').value = ''; // Limpiar el input
+    }
+</script>
+
+</body>
+</html>
